@@ -25,13 +25,8 @@ let seat_number boarding_pass =
 
 let day05a boarding_passes =
   boarding_passes |> List.map ~f:seat_number
-  |>
-  let rec max_val = function
-    | [] -> assert false
-    | [ head ] -> head
-    | head :: tail -> max head (max_val tail)
-  in
-  max_val
+  |> List.max_elt ~compare:Int.compare
+  |> Option.value_exn
 
 let day05b boarding_passes =
   let all_seats =

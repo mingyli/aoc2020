@@ -1,4 +1,5 @@
 (executable
   (name      day05)
-  (libraries base stdio str re))
+  (libraries base stdio str re)
+  (preprocess (pps ppx_jane)))
 
