@@ -11,15 +11,14 @@ let read_grid () =
 let toboggan grid (dr, dc) =
   let height = Array.length grid in
   let width = Array.length grid.(0) in
-  let row = ref 0 in
-  let col = ref 0 in
-  let result = ref 0 in
-  while !row < height do
-    if Char.equal grid.(!row).(!col) '#' then Int.incr result;
-    row := !row + dr;
-    col := (!col + dc) % width
-  done;
-  !result
+  let rec aux row col acc =
+    if row >= height then acc
+    else
+      aux (row + dr)
+        ((col + dc) % width)
+        (if Char.equal grid.(row).(col) '#' then acc + 1 else acc)
+  in
+  aux 0 0 0
 
 let day3a grid = toboggan grid (1, 3)
 
