@@ -65,8 +65,7 @@ let day08b instructions =
          let result = simulate 0 (Set.empty (module Int)) 0 in
          let () = instructions.(index) <- old_instruction in
          result)
-  |> List.find_map ~f:(fun o -> o)
-  |> Option.value_exn
+  |> List.filter_opt |> List.hd_exn
 
 let () =
   let instructions = read_instructions () in
